@@ -19,22 +19,13 @@ import com.frontendmasters.coffeemasters.OffersPage
 import com.retardeddev.coffeemasters.pages.InfoPage
 import com.retardeddev.coffeemasters.pages.MenuPage
 import com.retardeddev.coffeemasters.pages.OrderPage
-import com.retardeddev.coffeemasters.ui.theme.CoffeeMastersTheme
 import com.retardeddev.coffeemasters.ui.theme.Primary
-
-@Preview
-@Composable
-fun AppPreview() {
-    CoffeeMastersTheme {
-        App()
-    }
-}
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App() {
+fun App(dataManager: DataManager) {
     var currentPage = remember{
         mutableStateOf(Routes.MenuPage.route)
     }
@@ -59,9 +50,9 @@ fun App() {
         },
         content = {
             when (currentPage.value) {
-                Routes.MenuPage.route -> MenuPage()
+                Routes.MenuPage.route -> MenuPage(dataManager)
                 Routes.offersPage.route -> OffersPage()
-                Routes.OrderPage.route -> OrderPage()
+                Routes.OrderPage.route -> OrderPage(dataManager)
                 Routes.InfoPage.route -> InfoPage()
             }
         }
